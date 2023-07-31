@@ -18,7 +18,7 @@ const HomeScreen: React.FC = () => {
     setCurrentPage(page);
   };
 
- /* const renderPage = () => {
+  const renderPage = () => {
     switch (currentPage) {
       case 'A':
         return (
@@ -120,29 +120,8 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
   },
-}); */
+}); 
 
-const renderPage = () => {
-  switch (currentPage) {
-    case 'A':
-      return (
-        <View >
-          <View>
-            <ReferenceList />
-          </View>
-        </View>
-      );
-  }}
-return (
-  <View>
-    {renderPage()}
-    <View>
-      <TouchableOpacity onPress={() => changePage('A')} >
-        <Image source={require('../../assets/warehouse_2.png')} />
-      </TouchableOpacity>
-      </View>
-    </View>
-      );
-} 
+
 
 export default HomeScreen;
