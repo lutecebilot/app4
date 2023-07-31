@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "app4",
+    "name": "app_ccp_lutècebilot",
     "slug": "app4",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -15,16 +15,26 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSDocumentPickerUsageDescription": "Besoin d'accéder à vos fichiers pour sélectionner un fichier à téléverser."
+      },
+      "bundleIdentifier": "CCPLutece"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.lutece_bilot.app4"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "9fce76b9-f991-406e-928f-e43f24cf6922"
+      }
     }
   }
 }
