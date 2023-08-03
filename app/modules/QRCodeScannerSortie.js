@@ -33,7 +33,7 @@ const QRCodeScannerSortie = () => {
     const id = referenceParts[0].trim();
     console.log('id',id);
     const user = FIREBASE_AUTH.currentUser;
-    const userId = user!.uid;
+    const userId = user.uid;
     const userDocRef = doc(FIREBASE_DATABASE, 'Utilisateur', userId);
     const userDocSnapshot = await getDoc(userDocRef);
     const ville = userDocSnapshot.data().pays;
@@ -118,7 +118,7 @@ const QRCodeScannerSortie = () => {
     // console.log("refernece part :",referenceParts[0]);
     const id = referenceParts[0].trim();
     const user = FIREBASE_AUTH.currentUser;
-    const userId = user!.uid;
+    const userId = user.uid;
     const userDocRef = doc(FIREBASE_DATABASE, 'Utilisateur', userId);
     const userDocSnapshot = await getDoc(userDocRef);
     const ville = userDocSnapshot.data().pays;

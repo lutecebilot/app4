@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity,Image, Alert } from "react-native";
 import { FIREBASE_AUTH, FIREBASE_DATABASE, signOutUser } from "../../firebaseconfig";
-import { useNavigation } from "@react-navigation/native";
+/*import { useNavigation } from "@react-navigation/native";*/
 import firebase from "firebase/compat";
 import { doc, getDoc } from "firebase/firestore";
 
@@ -9,7 +9,7 @@ const PageLogout = () => {
   const [username, setUsername] = useState("");
   const [entrepot, setEntrepot] = useState("");
   const [mail, setMail] = useState("");
-  const navigation = useNavigation();
+  /*const navigation = useNavigation();*/
   const user = FIREBASE_AUTH.currentUser;
 
   useEffect(() => {

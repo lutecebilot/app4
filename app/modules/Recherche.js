@@ -1,12 +1,14 @@
 import React from 'react';
 import { View, TextInput, StyleSheet, TextInputProps } from 'react-native';
 
-interface RechercheProps extends TextInputProps {
-  searchValue: string;
-  onSearchChange: (text: string) => void;
-}
+const RechercheProps = {
+  searchValue: '', 
+  onSearchChange: (text) => {
+    console.log('New search value:', text);
+  },
+};
 
-const Recherche: React.FC<RechercheProps> = ({ searchValue, onSearchChange }) => {
+const Recherche = ({ searchValue, onSearchChange }) => {
   return (
     <View style={styles.container}>
       <TextInput

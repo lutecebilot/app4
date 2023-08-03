@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image, Button } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+/*import { useNavigation } from '@react-navigation/native';*/
 import ReferenceList from '../modules/ReferenceList'; // Import du composant ReferenceList
 import QRCodeScannerSortie from '../modules/QRCodeScannerSortie';
 import PageLogout from '../modules/PageLogout';
-import ExcelFilesButton_csv from '../modules/ExcelFilesButtonCSV';
-import ListeLivraisonsScreenCSV from '../modules/ListeLivraisonScreenCSV';
+import ExcelFilesButton from '../modules/ExcelFilesButton';
+import ListeLivraisonScreenCSV from '../modules/ListeLivraisonScreenCSV';
 
-type Page = 'A' | 'B' | 'H' | 'F' | 'G' | 'D';
 
-const HomeScreen: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState<Page>('A');
-  const navigation = useNavigation();
-  
+const pageOptions = ['A', 'B', 'H', 'F', 'G', 'D'];
 
-  const changePage = (page: Page) => {
+const HomeScreen = () => {
+  const [currentPage, setCurrentPage] = useState('A'); 
+  /*const navigation = useNavigation();*/
+
+  const changePage = (page) => { 
     setCurrentPage(page);
   };
 
@@ -38,9 +38,9 @@ const HomeScreen: React.FC = () => {
       case 'H':
         return (
            <View style={styles.pageContainer}>
-            <Text style={styles.title}>Arrivées</Text>
-            <ListeLivraisonsScreenCSV/>
-            <ExcelFilesButton_csv/>
+            <Text style={styles.title}>Arrivi</Text>
+            <ListeLivraisonScreenCSV/>
+            <ExcelFilesButton/>
           </View>
         );
       case 'G':
@@ -54,6 +54,7 @@ const HomeScreen: React.FC = () => {
           <View style={styles.pageContainer}>
             <Text style={styles.title}></Text>
             <PageLogout/>
+            {/* <Button title="essai" onPress={Ajout} /> */}
           </View>
         );
       default:
@@ -66,10 +67,10 @@ const HomeScreen: React.FC = () => {
       {renderPage()}
       <View style={styles.bottomBar}>
         <TouchableOpacity onPress={() => changePage('A')} style={styles.button}>
-          <Image source={require('../../assets/warehouse_2.png')} style={styles.buttonImage} />
+          <Image source={require('../../assets/warehouse.png')} style={styles.buttonImage} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => changePage('H') }  style={styles.button}>
-          <Image source={require('../../assets/truck_2.png')} style={styles.buttonImage} />
+          <Image source={require('../../assets/camionentrant.png')} style={styles.buttonImage} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => changePage('G')} style={styles.button}>
           <Image source={require('../../assets/qrcode.png')} style={styles.buttonImage} />
@@ -120,8 +121,6 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
   },
-}); 
-
-
+});
 
 export default HomeScreen;

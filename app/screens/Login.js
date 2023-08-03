@@ -2,15 +2,15 @@ import { StyleSheet, Text, TextInput, View, ActivityIndicator, TouchableOpacity,
 import React, { useState } from 'react';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
-import { useNavigation } from '@react-navigation/native';
+/*import { useNavigation } from '@react-navigation/native';*/
 import { FIREBASE_APP,FIREBASE_AUTH  } from '../../firebaseconfig';
 
-const Login: React.FC = () => {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const auth = FIREBASE_AUTH;
-  const navigation = useNavigation();
+  /*const navigation = useNavigation();*/
 
   const handleLogin = async () => {
     setLoading(true);
@@ -21,7 +21,7 @@ const Login: React.FC = () => {
       console.log('Logged in with:', user.email);
       setEmail('');
       setPassword('');
-      navigation.navigate('Main' as never);
+      navigation.navigate('Main');
     } catch (error) {
       console.log(error);
       alert('E-mail o password non validi');
@@ -46,7 +46,7 @@ const Login: React.FC = () => {
         entrepot: 'JetLog',
         statut: 'Utilisateur',
       });
-      navigation.navigate('Main' as never);
+      navigation.navigate('Main');
     } catch (error) {
       console.log(error);
       alert('Errore durante la creazione dell\'account');

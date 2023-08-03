@@ -7,7 +7,7 @@ const BoutonPlusUn = () => {
   const handleButtonPress = async () => {
     try {
       const user = FIREBASE_AUTH.currentUser;
-      const userId = user!.uid;
+      const userId = user.uid;
       const userDocRef = doc(FIREBASE_DATABASE, 'Utilisateur', userId);
       const userDocSnapshot = await getDoc(userDocRef);
       const ville = userDocSnapshot.data().pays;

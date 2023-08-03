@@ -17,18 +17,18 @@ const memoize = (func) => {
   };
 };
 
-interface Reference {
-  id: string;
-  ref: string;
-  stock: number;
-  stocknoncomplet: number;
-  Réservé: number;
-}
+const Reference = {
+  id: '',
+  ref: '',
+  stock: 0,
+  stocknoncomplet: 0,
+  Réservé: 0,
+};
 
-const ReferenceList: React.FC = () => {
-  const [references, setReferences] = useState<Reference[]>([]);
-  const [expandedReferences, setExpandedReferences] = useState<boolean[]>([]);
-  const [searchValue, setSearchValue] = useState<string>('');
+const ReferenceList = () => {
+  const [references, setReferences] = useState([]);
+  const [expandedReferences, setExpandedReferences] = useState([]);
+  const [searchValue, setSearchValue] = useState('');
   
   const fetchReferencesMemoized = memoize(async () => {
     const db = getFirestore(FIREBASE_APP);
@@ -38,9 +38,9 @@ const ReferenceList: React.FC = () => {
     const userDocSnapshot = await getDoc(userDocRef);
     const ville = userDocSnapshot.data().pays;
     const lieu = userDocSnapshot.data().entrepot;
-    const referenceCollection = collection(db, 'Pays', ville, lieu);
+    const referenceCollection = collection(db, 'Pays', ville, lieu+'Effectif');
     const querySnapshot = await getDocs(referenceCollection);
-    const referenceData: Reference[] = [];
+    const referenceData = [];
     querySnapshot.forEach((doc) => {
       referenceData.push({
         id: doc.id,
@@ -65,7 +65,7 @@ const ReferenceList: React.FC = () => {
     fetchReferences();
   }, []);
 
-  const handleReferencePress = (index: number) => {
+  const handleReferencePress = (index) => {
     setExpandedReferences((prevState) => {
       const updatedExpandedReferences = [...prevState];
       updatedExpandedReferences[index] = !updatedExpandedReferences[index];
@@ -84,14 +84,14 @@ const ReferenceList: React.FC = () => {
   };
   
 
-  const formatColumnValue = (value: string, columnWidth: number): string => {
+  const formatColumnValue = (value, columnWidth) => {
     const stringValue = String(value);
     const referenceParts = stringValue.split('-');
     const stringValue2 = referenceParts.length > 0 ? referenceParts[0].trim() : '';
     return stringValue2;
   };
 
-  const formatColumnValueTitle = (value: string, columnWidth: number): JSX.Element => {
+  const formatColumnValueTitle = (value, columnWidth) => {
     const stringValue = String(value);
     const remainingSpaces = columnWidth - stringValue.length;
     const leftSpaces = Math.floor(remainingSpaces / 2);
@@ -107,7 +107,7 @@ const ReferenceList: React.FC = () => {
     );
   };
 
-  const filteredReferences = references.reduce((acc: Reference[], ref) => {
+  const filteredReferences = references.reduce((acc, ref) => {
     const existingRef = acc.find((r) => formatColumnValue(r.ref, 24) === formatColumnValue(ref.ref, 24));
     if (!existingRef) {
       acc.push(ref);
@@ -120,7 +120,7 @@ const ReferenceList: React.FC = () => {
     return referencePart.startsWith(searchValue.toLowerCase());
   });
 
-  const handleSearchChange = (text: string) => {
+  const handleSearchChange = (text) => {
     setSearchValue(text);
   };
 
